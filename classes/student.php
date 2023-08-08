@@ -33,4 +33,12 @@ class Student
         return false;
     }
 
+    public function get_all_data()
+    {
+        $sql = 'SELECT * FROM table_students';
+        $query = $this->conn->prepare($sql);
+        $query->execute();
+        return $query->get_result();
+
+    }
 }

@@ -55,5 +55,22 @@ class Student
         $query->close();
         return $data;
     }
+    public function update_student()
+    {
+        $sql = "UPDATE table_students SET name=?, email=?, mobile=? WHERE id=?";
+        $query = $this->conn->prepare($sql);
+        $this->name = htmlspecialchars(strip_tags($this->name));
+        $this->email = htmlspecialchars(strip_tags($this->email));
+        $this->mobile = htmlspecialchars(strip_tags($this->mobile));
+        $this->id = htmlspecialchars(strip_tags($this->id));
+
+        $query->bind_param('sssi', $this->name, $this->email, $this->mobile, $this->id);
+
+        if ($query->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
 }

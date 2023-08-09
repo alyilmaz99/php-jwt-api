@@ -72,5 +72,18 @@ class Student
             return false;
         }
     }
+    public function delete_student()
+    {
+        $sql = "DELETE from table_students WHERE id=?";
+        $query = $this->conn->prepare($sql);
+        $this->id = htmlspecialchars(strip_tags($this->id));
+        $query->bind_param('i', $this->id);
+
+        if ($query->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
 }

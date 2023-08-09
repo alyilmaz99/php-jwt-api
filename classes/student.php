@@ -6,7 +6,7 @@ class Student
     public $name;
     public $email;
     public $mobile;
-
+    public $id;
     private $conn;
 
     public function __construct($db)
@@ -41,4 +41,19 @@ class Student
         return $query->get_result();
 
     }
+
+    public function get_single_student()
+    {
+        $sql = "SELECT * from table_students WHERE id = ?";
+        $query = $this->conn->prepare($sql);
+
+        $query->bind_param("i", $this->id);
+
+        $query->execute();
+        $data = $query->get_result()->fetch_assoc();
+
+        $query->close();
+        return $data;
+    }
+
 }

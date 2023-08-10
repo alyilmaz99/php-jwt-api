@@ -1,5 +1,5 @@
 <?php
-
+ini_set("display_errors", 1);
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: POST");
 
@@ -20,25 +20,39 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
         $users->name = $data->name;
         $users->email = $data->email;
         $users->password = password_hash($data->password, PASSWORD_DEFAULT);
-        if ($users->create_user()) {
-            http_response_code(200);
-            echo json_encode(array(
-                [
-                    'message' => 'user created',
-                    'status' => 1,
 
-                ],
-            ));
-        } else {
-            http_response_code(500);
+        $email_checker = $users->check_email();
+        if (!empty($email_checker)) {
+            http_response_code(404);
             echo json_encode(array(
                 [
-                    'message' => 'failed create',
+                    'message' => 'email has used ',
                     'status' => 0,
 
                 ],
             ));
+        } else {
+            if ($users->create_user()) {
+                http_response_code(200);
+                echo json_encode(array(
+                    [
+                        'message' => 'user created',
+                        'status' => 1,
+
+                    ],
+                ));
+            } else {
+                http_response_code(500);
+                echo json_encode(array(
+                    [
+                        'message' => 'failed create',
+                        'status' => 0,
+
+                    ],
+                ));
+            }
         }
+
     } else {
         http_response_code(500);
         echo json_encode(array(

@@ -38,4 +38,17 @@ class Users
         }
 
     }
+    public function check_email()
+    {
+        $sql = "SELECT * from table_users WHERE email=?";
+        $query = $this->conn->prepare($sql);
+        $query->bind_param('s', $this->email);
+        if ($query->execute()) {
+            $data = $query->get_result()->fetch_assoc();
+            return $data;
+        } else {
+            return array();
+        }
+
+    }
 }

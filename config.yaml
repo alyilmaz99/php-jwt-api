@@ -1,0 +1,5 @@
+database:
+  hostname: localhost
+  username: root
+  password: 2901
+  database: rest_php_api

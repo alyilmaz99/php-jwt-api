@@ -6,6 +6,7 @@ use \Firebase\JWT\JWT;
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: POST');
 header('Content-type: application/json; charst=UTF-8');
+include_once "../config.php";
 
 include_once "../config/database.php";
 include_once "../classes/users.php";
@@ -32,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
             $aud = "myusers";
             $user_arr_data = array("id" => $userData['id'], "name" => $userData['name'], "email" => $userData['email']);
 
-            $secret_key = "G5NzbPBrb2B5Db+U";
+            $secret_key = SECRET_KEY;
 
             if (password_verify($data->password, $password)) {
                 $payload_info = array(

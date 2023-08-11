@@ -1,4 +1,5 @@
 <?php
+include_once "../config.php";
 
 class Database
 {
@@ -12,10 +13,12 @@ class Database
 
     public function connect()
     {
-        $this->hostname = 'localhost';
-        $this->dbname = 'rest_php_api';
-        $this->username = 'root';
-        $this->password = '2901';
+        $config = parse_ini_file("../config.ini", true);
+
+        $this->hostname = DB_SERVER;
+        $this->dbname = $config["database"]["database"];
+        $this->username = DB_USERNAME;
+        $this->password = DB_PASSWORD;
 
         $this->conn = new mysqli($this->hostname, $this->username, $this->password, $this->dbname);
 

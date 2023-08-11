@@ -9,6 +9,7 @@ header('Content-type: application/json; charst=UTF-8');
 
 include_once "../config/database.php";
 include_once "../classes/users.php";
+include_once "../config.php";
 
 $db = new Database();
 $connection = $db->connect();
@@ -20,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
 
     if (!empty($data->jwt)) {
         try {
-            $secret_key = "G5NzbPBrb2B5Db+U";
+            $secret_key = SECRET_KEY;
 
             $decoded_data = JWT::decode($data->jwt, new Key($secret_key, "HS512"));
             http_response_code(200);

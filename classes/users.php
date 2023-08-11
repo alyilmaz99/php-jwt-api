@@ -64,4 +64,21 @@ class Users
             return array();
         }
     }
+    public function create_project()
+    {
+        $sql = "INSERT INTO table_projects SET user_id=?, name=?, description=?,status=?";
+        $query = $this->conn->prepare();
+        $project_name = htmlspecialchars($this->project_name);
+        $description = htmlspecialchars($this->description);
+        $status = htmlspecialchars($this->status);
+
+        $query->bind_param("isss", $this->user_id, $project_name, $description, $status);
+
+        if ($query->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
 }

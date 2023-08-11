@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
             $iss = "localhost";
             $iat = time();
             $nbf = $iat + 5;
-            $exp = $iat + 60;
+            $exp = $iat + 1000;
             $aud = "myusers";
             $user_arr_data = array("id" => $userData['id'], "name" => $userData['name'], "email" => $userData['email']);
 

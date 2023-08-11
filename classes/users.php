@@ -1,5 +1,5 @@
 <?php
-
+ini_set('display_errors', 1);
 class Users
 {
 
@@ -66,8 +66,8 @@ class Users
     }
     public function create_project()
     {
-        $sql = "INSERT INTO table_projects SET user_id=?, name=?, description=?,status=?";
-        $query = $this->conn->prepare();
+        $sql = "INSERT INTO table_projects SET user_id=?, name=?, description=?, status=?";
+        $query = $this->conn->prepare($sql);
         $project_name = htmlspecialchars($this->project_name);
         $description = htmlspecialchars($this->description);
         $status = htmlspecialchars($this->status);

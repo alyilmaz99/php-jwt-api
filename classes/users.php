@@ -81,4 +81,15 @@ class Users
         }
 
     }
+    public function list_all_projects()
+    {
+        $sql = "SELECT * FROM table_projects  ORDER BY id DESC";
+        $query = $this->conn->prepare($sql);
+        if ($query->execute()) {
+            $data = $query->get_result();
+            return $data;
+        } else {
+            return array();
+        }
+    }
 }

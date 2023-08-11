@@ -27,12 +27,12 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
 
             $iss = "localhost";
             $iat = time();
-            $nbf = $iat + 10;
-            $exp = $iat + 30;
+            $nbf = $iat + 5;
+            $exp = $iat + 60;
             $aud = "myusers";
             $user_arr_data = array("id" => $userData['id'], "name" => $userData['name'], "email" => $userData['email']);
 
-            $secret_key = "4f1feeca525de4cdb064656007da3edac7895a87ff0ea865693300fb8b6e8f9c";
+            $secret_key = "G5NzbPBrb2B5Db+U";
 
             if (password_verify($data->password, $password)) {
                 $payload_info = array(
@@ -42,7 +42,6 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
                     "exp" => $exp,
                     "aud" => $aud,
                     "data" => $user_arr_data,
-
                 );
 
                 $jwt = JWT::encode($payload_info, $secret_key, 'HS512');

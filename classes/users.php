@@ -92,4 +92,16 @@ class Users
             return array();
         }
     }
+    public function get_user_projects()
+    {
+        $sql = "SELECT * FROM table_projects WHERE user_id=? ORDER BY id DESC";
+        $query = $this->conn->prepare($sql);
+        $query->bind_param("i", $this->user_id);
+        if ($query->execute()) {
+            $data = $query->get_result();
+            return $data;
+        } else {
+            return array();
+        }
+    }
 }
